@@ -1,0 +1,255 @@
+openapi: 3.0.0
+info:
+  title: Shoppable Commerce API Suite Catalog Products API
+  description: A collection of endpoints to enable Shoppable cloud functionality
+  version: 1.0.2
+  contact:
+    name: Shoppable
+    url: ''
+    email: devteam@shoppable.com
+  termsOfService: https://about.shoppable.com/terms#terms-of-use
+servers:
+- url: http://localhost:8282
+  description: Local Docker
+- url: https://cloud.staging.shoppable.com
+  description: Staging
+- url: https://cloud.shoppable.com
+  description: Production
+security:
+- Bearer: []
+- Secret: []
+tags:
+- name: Products
+paths:
+  /products:
+    post:
+      summary: Get detailed product information
+      description: This endpoint is used to query a given set of UPCs to return stock availabilities, up-to-date price information and variations
+      operationId: products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - upcs
+              properties:
+                upcs:
+                  type: array
+                  items:
+                    type: string
+                    description: Array of UPC codes to lookup
+                lean:
+                  type: boolean
+                  description: Setting this property to true will add a metadata object property to the response which adds additional data including total merchants, total in stock, and link off data for a UPC.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  error:
+                    type: boolean
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+      tags:
+      - Products
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Internal ID used to identify the product
+        affiliateNetwork:
+          type: string
+          description: Affiliate network associated with the product.
+        merchantId:
+          type: string
+          description: Internal Shoppable identifier for the retailer.
+        merchant:
+          type: string
+          description: Retailer / merchant selling the product (e.g. "Lacoste_Corp"). This is the field that previously appeared in `brand`.
+        sourceId:
+          type: string
+          description: Internal identifier
+        partNumber:
+          type: string
+          description: Identifier for a parent product (a product family). All variations of the same product share the same `partNumber`.
+        merchantSku:
+          type: string
+          description: Merchant's SKU for this product.
+        upc:
+          type: string
+          description: Product's UPC.
+        name:
+          type: string
+          description: Product name
+        brand:
+          type: string
+          nullable: true
+          description: Product's manufacturer brand (e.g. "Lacoste"). May be null when the source feed does not provide brand data. Previously contained the retailer/merchant name — that value has moved to the `merchant` field.
+        category:
+          type: string
+          description: Product's category.
+        description:
+          type: string
+          description: Product description.
+        url:
+          type: string
+          description: Product's URL at the merchant's site.
+        salePrice:
+          type: number
+          description: Product's price when on sale.
+        price:
+          type: number
+          description: Product's MSRP.
+        size:
+          type: string
+          description: Product size, if applicable.
+        color:
+          type: string
+          description: Product's color, if applicable.
+        status:
+          type: integer
+          description: Product status. Acceptable values are 0 (meaning out of stock) or 1 (meaning in stock and available).
+        image:
+          type: array
+          description: URL to product image.
+          items:
+            type: string
+        commissionRate:
+          type: string
+          description: Product's commmission rate, if applicable.
+        merchantLogo:
+          type: string
+          description: Logo of the merchant from which this product is available.
+        group:
+          type: string
+          description: Product group, if applicable. This field is generally used to denote variations of the same product.
+        maxQuantity:
+          type: integer
+          description: Maximum quantity end users are allowed to order at a time.
+        shippingCharge:
+          type: number
+          description: Fee for shipping the product.
+        freeShipping:
+          type: string
+          description: Denotes if this product is available for free shipping promotions.
+        customerServiceUrl:
+          type: string
+          description: URL where users can get help, when needed.
+        returnPolicy:
+          type: string
+          description: Merchant's return policy for this product.
+        createdOn:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp marking when the product was first added to the Shoppable catalog.
+        updatedAt:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp marking when the product was last updated. For merchants whose catalogs have not yet been reindexed with per-product update timestamps, this falls back to `createdOn`. Use `updatedAfter` / `updatedBefore` on `/catalog` to filter by this value.
+        isSingleVariation:
+          type: boolean
+          description: 'Present only on `parentOnly: true` responses. Indicates whether the parent product has exactly one variation. When true, the parent record also includes per-variation fields (id, price, size, color, upc, etc.); when false, those fields are omitted and clients should call `/product-availability` for the full variation list.'
+        _version_:
+          type: integer
+          description: Internal version number for a given product.
+        variations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: 'Token provided by your Customer Success Manager
+
+
+        **For Internal Endpoints (/internal/*):**
+
+        ```
+
+        Kolu72V3T3eFplHNe66e8aef90aba018
+
+        ```
+
+
+        **For Regular API Endpoints (default test customer):**
+
+        ```
+
+        U2FsdGVkX192JseAYpgNqMvh5tRQJwAfc4xoA5PKFiXbgWqH2FGD4obxczwL4EEgrj4jVCDxrAblAy3b2W/SK1R3jCWtwQ1fyqQvhfdZGUoXktXwz0tpYfi0I7bVsvQil4D1TeqirpzX66lZ467EFDogCwlWBkoEuhFZNHNnYoQW2LT3Mr5GMIdfBgIcvx6QrtE24Q5pnIBzBDY4KnnpA2bNQKDTZXX5Q8JKM8X30P0DLtvKPz4wqMtpMEG1As0OLhXG2MNKbWlmiTTzhs+q2Kp86uwCEDguTpU8bCUhi44=
+
+        ```
+
+
+        This token works with the default "Test Customer" created by the seed script.
+
+        '
+    Secret:
+      type: apiKey
+      name: x-shoppable-secret
+      in: header
+      description: 'Authorization header provided by your Customer Success Manager
+
+
+        **For Internal Endpoints (/internal/*):**
+
+        ```
+
+        40ba20012ddf314e43234ee53b4b20f2
+
+        ```
+
+
+        **For Regular API Endpoints:**
+
+        ```
+
+        test_secret_12345678901234567890
+
+        ```
+
+        '

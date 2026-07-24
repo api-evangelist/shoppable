@@ -1,0 +1,206 @@
+openapi: 3.0.0
+info:
+  title: Shoppable Commerce API Suite Catalog Merchants API
+  description: A collection of endpoints to enable Shoppable cloud functionality
+  version: 1.0.2
+  contact:
+    name: Shoppable
+    url: ''
+    email: devteam@shoppable.com
+  termsOfService: https://about.shoppable.com/terms#terms-of-use
+servers:
+- url: http://localhost:8282
+  description: Local Docker
+- url: https://cloud.staging.shoppable.com
+  description: Staging
+- url: https://cloud.shoppable.com
+  description: Production
+security:
+- Bearer: []
+- Secret: []
+tags:
+- name: Merchants
+paths:
+  /merchants:
+    get:
+      summary: Get information about active merchants
+      description: Requires an API Suite license. Please contact your Customer Success Manager
+      operationId: merchants
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/merchants'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: An error occurred fetching merchants
+      tags:
+      - Merchants
+  /merchants/{merchantId}:
+    get:
+      summary: Get information about a single merchant
+      description: Requires an API Suite license. Please contact your Customer Success Manager
+      operationId: merchantsById
+      parameters:
+      - in: path
+        name: merchantId
+        schema:
+          type: string
+        required: true
+        description: The ID of the merchant you wish to return
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/merchants'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: An error occurred fetching merchants
+      tags:
+      - Merchants
+components:
+  schemas:
+    merchants:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Internal merchant ID
+        name:
+          type: string
+          description: Merchant's name
+        merchantLogo:
+          type: string
+          description: URL to merchant's logo
+        maxQuantity:
+          type: number
+          description: Maximum number of items allowed per order
+        group:
+          type: string
+          description: Catalog group this merchant belongs to
+        customerServiceUrl:
+          type: string
+          description: URL to merchant's customer service page
+        returnPolicy:
+          type: string
+          description: URL to page detailing merchant's return policy
+        freeShipping:
+          type: string
+          description: Minimum threshold for order to qualify for free shipping
+        shippingCharge:
+          type: string
+          description: Amount merchant charges for shipping if free shipping threshold is undefined or unmet
+        minimumOrderAmount:
+          type: number
+          description: Minimum order amount for merchant to accept order
+        orderMerchantId:
+          type: string
+          description: Internal legacy identifier to ensure backwards compatibility
+        isActive:
+          type: boolean
+          description: Flag that indicates whether a merchant is active or not
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: 'Token provided by your Customer Success Manager
+
+
+        **For Internal Endpoints (/internal/*):**
+
+        ```
+
+        Kolu72V3T3eFplHNe66e8aef90aba018
+
+        ```
+
+
+        **For Regular API Endpoints (default test customer):**
+
+        ```
+
+        U2FsdGVkX192JseAYpgNqMvh5tRQJwAfc4xoA5PKFiXbgWqH2FGD4obxczwL4EEgrj4jVCDxrAblAy3b2W/SK1R3jCWtwQ1fyqQvhfdZGUoXktXwz0tpYfi0I7bVsvQil4D1TeqirpzX66lZ467EFDogCwlWBkoEuhFZNHNnYoQW2LT3Mr5GMIdfBgIcvx6QrtE24Q5pnIBzBDY4KnnpA2bNQKDTZXX5Q8JKM8X30P0DLtvKPz4wqMtpMEG1As0OLhXG2MNKbWlmiTTzhs+q2Kp86uwCEDguTpU8bCUhi44=
+
+        ```
+
+
+        This token works with the default "Test Customer" created by the seed script.
+
+        '
+    Secret:
+      type: apiKey
+      name: x-shoppable-secret
+      in: header
+      description: 'Authorization header provided by your Customer Success Manager
+
+
+        **For Internal Endpoints (/internal/*):**
+
+        ```
+
+        40ba20012ddf314e43234ee53b4b20f2
+
+        ```
+
+
+        **For Regular API Endpoints:**
+
+        ```
+
+        test_secret_12345678901234567890
+
+        ```
+
+        '

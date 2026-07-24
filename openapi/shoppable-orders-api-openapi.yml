@@ -1,0 +1,365 @@
+openapi: 3.0.0
+info:
+  title: Shoppable Commerce API Suite Catalog Orders API
+  description: A collection of endpoints to enable Shoppable cloud functionality
+  version: 1.0.2
+  contact:
+    name: Shoppable
+    url: ''
+    email: devteam@shoppable.com
+  termsOfService: https://about.shoppable.com/terms#terms-of-use
+servers:
+- url: http://localhost:8282
+  description: Local Docker
+- url: https://cloud.staging.shoppable.com
+  description: Staging
+- url: https://cloud.shoppable.com
+  description: Production
+security:
+- Bearer: []
+- Secret: []
+tags:
+- name: Orders
+paths:
+  /orders/{orderId}:
+    get:
+      summary: Get details of a specified order
+      description: This endpoint is used to return the details of an order by order number
+      operationId: orders
+      parameters:
+      - in: path
+        name: orderId
+        schema:
+          type: string
+        required: true
+        description: OrderId of the order you wish to return
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orderDate:
+                    type: string
+                  updatedAt:
+                    type: string
+                  orderNumber:
+                    type: string
+                  marketingOptIn:
+                    type: boolean
+                  status:
+                    type: string
+                  shippingTotal:
+                    type: number
+                  itemsTotal:
+                    type: number
+                  total:
+                    type: number
+                  tax_payable:
+                    type: number
+                  email:
+                    type: string
+                  shippingDetails:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/Address'
+                  billingDetails:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/Address'
+                  merchants:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/merchants'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+      tags:
+      - Orders
+  /orders/campaign/{campaignName}:
+    get:
+      summary: Get all orders associated with a specific campaign
+      description: This endpoint is used to return the details of all orders associated with the specified campaign name
+      operationId: ordersbyCampaign
+      parameters:
+      - in: path
+        name: campaignName
+        schema:
+          type: string
+        required: true
+        description: Name of the campaign associated with the orders you wish to return
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orderDate:
+                    type: string
+                  updatedAt:
+                    type: string
+                  orderNumber:
+                    type: string
+                  marketingOptIn:
+                    type: boolean
+                  status:
+                    type: string
+                  shippingTotal:
+                    type: number
+                  itemsTotal:
+                    type: number
+                  total:
+                    type: number
+                  tax_payable:
+                    type: number
+                  email:
+                    type: string
+                  shippingDetails:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/Address'
+                  billingDetails:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/Address'
+                  merchants:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: Internal merchant ID
+                      merchant:
+                        type: string
+                        description: Merchant's name
+                      orderNumber:
+                        type: number
+                        description: The order's unique identifier
+                      shipping:
+                        type: number
+                        description: Merchant's flat shipping fee.
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/item'
+                      total:
+                        type: number
+                        description: Order total.
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+      tags:
+      - Orders
+components:
+  schemas:
+    merchants:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Internal merchant ID
+        name:
+          type: string
+          description: Merchant's name
+        merchantLogo:
+          type: string
+          description: URL to merchant's logo
+        maxQuantity:
+          type: number
+          description: Maximum number of items allowed per order
+        group:
+          type: string
+          description: Catalog group this merchant belongs to
+        customerServiceUrl:
+          type: string
+          description: URL to merchant's customer service page
+        returnPolicy:
+          type: string
+          description: URL to page detailing merchant's return policy
+        freeShipping:
+          type: string
+          description: Minimum threshold for order to qualify for free shipping
+        shippingCharge:
+          type: string
+          description: Amount merchant charges for shipping if free shipping threshold is undefined or unmet
+        minimumOrderAmount:
+          type: number
+          description: Minimum order amount for merchant to accept order
+        orderMerchantId:
+          type: string
+          description: Internal legacy identifier to ensure backwards compatibility
+        isActive:
+          type: boolean
+          description: Flag that indicates whether a merchant is active or not
+    Address:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        zipCode:
+          type: string
+        phoneNumber:
+          type: string
+    item:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Internal product identifier.
+        upc:
+          type: string
+          description: Product UPC.
+        price:
+          type: number
+          description: Product price
+        quantity:
+          type: integer
+          description: Quantity ordered.
+        subTotal:
+          type: number
+          description: Order subtotal, which doesn't include taxes or shipping fees.
+        name:
+          type: string
+          description: Product name.
+        color:
+          type: string
+          description: Product color, if applicable.
+        size:
+          type: string
+          description: Product size, if applicable.
+        brand:
+          type: string
+          description: Product brand naame.
+        status:
+          type: string
+          description: Order's status. Values can be "processing" "completed" or "canceled"
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: 'Token provided by your Customer Success Manager
+
+
+        **For Internal Endpoints (/internal/*):**
+
+        ```
+
+        Kolu72V3T3eFplHNe66e8aef90aba018
+
+        ```
+
+
+        **For Regular API Endpoints (default test customer):**
+
+        ```
+
+        U2FsdGVkX192JseAYpgNqMvh5tRQJwAfc4xoA5PKFiXbgWqH2FGD4obxczwL4EEgrj4jVCDxrAblAy3b2W/SK1R3jCWtwQ1fyqQvhfdZGUoXktXwz0tpYfi0I7bVsvQil4D1TeqirpzX66lZ467EFDogCwlWBkoEuhFZNHNnYoQW2LT3Mr5GMIdfBgIcvx6QrtE24Q5pnIBzBDY4KnnpA2bNQKDTZXX5Q8JKM8X30P0DLtvKPz4wqMtpMEG1As0OLhXG2MNKbWlmiTTzhs+q2Kp86uwCEDguTpU8bCUhi44=
+
+        ```
+
+
+        This token works with the default "Test Customer" created by the seed script.
+
+        '
+    Secret:
+      type: apiKey
+      name: x-shoppable-secret
+      in: header
+      description: 'Authorization header provided by your Customer Success Manager
+
+
+        **For Internal Endpoints (/internal/*):**
+
+        ```
+
+        40ba20012ddf314e43234ee53b4b20f2
+
+        ```
+
+
+        **For Regular API Endpoints:**
+
+        ```
+
+        test_secret_12345678901234567890
+
+        ```
+
+        '

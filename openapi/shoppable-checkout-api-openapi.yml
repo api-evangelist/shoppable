@@ -1,0 +1,210 @@
+openapi: 3.0.0
+info:
+  title: Shoppable Commerce API Suite Catalog Checkout API
+  description: A collection of endpoints to enable Shoppable cloud functionality
+  version: 1.0.2
+  contact:
+    name: Shoppable
+    url: ''
+    email: devteam@shoppable.com
+  termsOfService: https://about.shoppable.com/terms#terms-of-use
+servers:
+- url: http://localhost:8282
+  description: Local Docker
+- url: https://cloud.staging.shoppable.com
+  description: Staging
+- url: https://cloud.shoppable.com
+  description: Production
+security:
+- Bearer: []
+- Secret: []
+tags:
+- name: Checkout
+paths:
+  /v6/checkout:
+    post:
+      summary: Complete a checkout action
+      description: Requires an API Suite license. Please contact your Customer Success Manager
+      operationId: checkout
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - cartDetails
+              - shippingDetails
+              - billingDetails
+              - paymentToken
+              properties:
+                cartDetails:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      lineItems:
+                        type: array
+                        description: Product information for itmes in cart.
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: Combined merchantId-upc
+                            price:
+                              type: number
+                              description: Product price
+                            quantity:
+                              type: integer
+                      email:
+                        type: string
+                      sendConfirmationEmail:
+                        type: boolean
+                      substitutionOptIn:
+                        type: boolean
+                      marketingOptIn:
+                        type: boolean
+                shippingDetails:
+                  $ref: '#/components/schemas/Address'
+                billingDetails:
+                  $ref: '#/components/schemas/Address'
+                paymentToken:
+                  type: string
+                  description: Value returned from Stripe API. **This token is only good for 15 minutes. A new token will need to be regenerated outside of that window.**
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orderNumber:
+                    type: string
+                    description: Shoppable-created order number
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Error message type.
+                  message:
+                    type: string
+                    description: Error message details
+                  merchantIds:
+                    type: array
+                    description: Array of merchantIds impacted.
+                    items:
+                      x-stoplight:
+                        id: rhajinc8yf10c
+                      type: string
+                  outOfStockItems:
+                    type: array
+                    description: Array of product Ids that are out of stock.
+                    items:
+                      type: string
+                  itemsWithPriceChange:
+                    type: array
+                    description: Array of product Ids whose price has changed outside the variablity defined in the Shoppable ToS.
+                    items:
+                      type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+      tags:
+      - Checkout
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        zipCode:
+          type: string
+        phoneNumber:
+          type: string
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: 'Token provided by your Customer Success Manager
+
+
+        **For Internal Endpoints (/internal/*):**
+
+        ```
+
+        Kolu72V3T3eFplHNe66e8aef90aba018
+
+        ```
+
+
+        **For Regular API Endpoints (default test customer):**
+
+        ```
+
+        U2FsdGVkX192JseAYpgNqMvh5tRQJwAfc4xoA5PKFiXbgWqH2FGD4obxczwL4EEgrj4jVCDxrAblAy3b2W/SK1R3jCWtwQ1fyqQvhfdZGUoXktXwz0tpYfi0I7bVsvQil4D1TeqirpzX66lZ467EFDogCwlWBkoEuhFZNHNnYoQW2LT3Mr5GMIdfBgIcvx6QrtE24Q5pnIBzBDY4KnnpA2bNQKDTZXX5Q8JKM8X30P0DLtvKPz4wqMtpMEG1As0OLhXG2MNKbWlmiTTzhs+q2Kp86uwCEDguTpU8bCUhi44=
+
+        ```
+
+
+        This token works with the default "Test Customer" created by the seed script.
+
+        '
+    Secret:
+      type: apiKey
+      name: x-shoppable-secret
+      in: header
+      description: 'Authorization header provided by your Customer Success Manager
+
+
+        **For Internal Endpoints (/internal/*):**
+
+        ```
+
+        40ba20012ddf314e43234ee53b4b20f2
+
+        ```
+
+
+        **For Regular API Endpoints:**
+
+        ```
+
+        test_secret_12345678901234567890
+
+        ```
+
+        '
