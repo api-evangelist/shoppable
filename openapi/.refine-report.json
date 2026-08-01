@@ -1,0 +1,24 @@
+{
+  "provider": "shoppable",
+  "sources": [
+    "shoppable-catalog-api-openapi.yml",
+    "shoppable-checkout-api-openapi.yml",
+    "shoppable-merchants-api-openapi.yml",
+    "shoppable-orderdata-api-openapi.yml",
+    "shoppable-orders-api-openapi.yml",
+    "shoppable-products-api-openapi.yml"
+  ],
+  "outputs": [
+    "shoppable-catalog-api-openapi.yml",
+    "shoppable-checkout-api-openapi.yml",
+    "shoppable-merchants-api-openapi.yml",
+    "shoppable-orderdata-api-openapi.yml",
+    "shoppable-orders-api-openapi.yml",
+    "shoppable-products-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

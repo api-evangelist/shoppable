@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/shoppable-cloud-openapi-original.yml
+standards:
+  - id: openapi-3.0
+    conforms: true
+    evidence: Published OpenAPI 3.0.0 definition on SwaggerHub (shoppable-dca/shoppable-cloud_api).
+  - id: http-bearer-auth
+    conforms: true
+    evidence: securityScheme type http scheme bearer (Authorization header).
+  - id: apikey-header-auth
+    conforms: true
+    evidence: securityScheme type apiKey in header (x-shoppable-secret).
+  - id: oauth2
+    conforms: false
+  - id: openid-connect
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors returned as application/json with a custom envelope, not application/problem+json.
+  - id: pagination
+    conforms: true
+    evidence: /catalog supports pageSize/page/deepPaging with pageCount/totalCount response fields.
+  - id: idempotency
+    conforms: false
+    evidence: No idempotency-key mechanism documented; checkout relies on a single-use 15-minute Stripe token.
+  - id: pci-dss
+    conforms: partial
+    evidence: >-
+      Card data is never handled directly by the Shoppable API; payment is
+      tokenized via Stripe (paymentToken), delegating card-data PCI scope to
+      Stripe. No independent Shoppable PCI certification was located.

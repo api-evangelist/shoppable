@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: searched
+source: https://api.swaggerhub.com/apis/shoppable-dca/shoppable-cloud_api
+scheme: semver (SwaggerHub definition version) + uri-path API versions (v5, v6)
+current_version: 1.0.2
+notes: >-
+  Shoppable does not publish a dated public changelog page. This record is
+  derived from the version history of the published SwaggerHub API definition.
+entries:
+  - version: 1.0.2
+    date: '2026-05-13'
+    name: Shoppable Commerce API Suite
+    highlights:
+      - Current published definition.
+      - Catalog search enrichments (parentOnly / single_option grouping,
+        updatedAfter / updatedBefore incremental sync, parentUpdateDelta).
+    breaking: false
+  - version: 1.0.1
+    date: '2026-02-13'
+    name: Shoppable Commerce API Suite
+    highlights:
+      - Renamed from "Shoppable Cloud API" to "Shoppable Commerce API Suite".
+    breaking: false
+    published: false
+  - version: 1.0.0
+    date: '2025-04-14'
+    name: Shoppable Cloud API
+    highlights:
+      - Initial published definition (products, catalog, orders, merchants, v6 checkout).
+    breaking: false

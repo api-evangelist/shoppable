@@ -1,0 +1,12 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/shoppable-cloud-openapi-original.yml
+skills:
+  - file: shoppable-search-and-checkout.md
+    name: Search the catalog and complete a checkout
+    api: openapi/shoppable-cloud-openapi-original.yml
+    operations: [catalog, checkout]
+  - file: shoppable-order-lookup.md
+    name: Look up order status
+    api: openapi/shoppable-cloud-openapi-original.yml
+    operations: [orders, ordersByDateRange, ordersbyCampaign]

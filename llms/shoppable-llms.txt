@@ -1,0 +1,32 @@
+# Shoppable
+
+> Shoppable is embeddable commerce infrastructure. Its universal checkout lets shoppers buy any product from any retailer in a single cart without leaving the content they are in — across editorial content, social, ads, connected TV, email, and AI/agentic channels. The Shoppable Commerce API Suite (v6) exposes product lookup, catalog search, merchant data, order data, and checkout, plus a hosted MCP server for agentic commerce.
+
+## APIs
+
+- [Shoppable Commerce API Suite (production)](https://cloud.shoppable.com): OpenAPI 3.0 REST API — products, catalog, merchants, orders, and v6 checkout. Dual-header auth (Authorization: Bearer + x-shoppable-secret).
+- [OpenAPI definition (SwaggerHub)](https://app.swaggerhub.com/apis-docs/shoppable-dca/shoppable-cloud_api/1.0.2): Published OpenAPI 3.0.0, version 1.0.2.
+
+## Agentic / MCP
+
+- [Shoppable MCP Server](https://mcp.shoppable.com/mcp): Hosted Model Context Protocol server (HTTP, bearer auth). Tools: product search, merchant lookup, add to cart (returns pre-populated checkout URL), get checkout URL, order lookup.
+- [MCP overview](https://72lux.github.io/shoppable-mcp/): Setup and tool documentation.
+
+## Docs
+
+- [Developer documentation](https://about.shoppable.com/help/setup-developer-documentation)
+- [Checkout API (v6)](https://about.shoppable.com/help/shoppable-embedded-checkout)
+- [Catalog API (v6)](https://about.shoppable.com/help/shoppable-v6-catalog-call-api)
+- [Product API (v5)](https://about.shoppable.com/help/shoppable-v5-product-api-call-documentation)
+- [Order Data API (v6)](https://about.shoppable.com/help/order-data-api-v6)
+- [Instant Shop](https://about.shoppable.com/products/instant-shop)
+- [Help Center](https://ask.shoppable.com)
+
+## Company
+
+- [About Shoppable](https://about.shoppable.com/)
+- [Pricing](https://about.shoppable.com/pricing)
+- [Terms of Service](https://about.shoppable.com/terms#terms-of-use)
+- [Privacy Policy](https://about.shoppable.com/terms#privacy-policy)
+- [Blog](https://about.shoppable.com/blog)
+- [Sign in](https://app.shoppable.com/signin)

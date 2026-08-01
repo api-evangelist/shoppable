@@ -1,0 +1,978 @@
+openapi: 3.0.0
+info:
+  title: Shoppable Commerce API Suite
+  description: A collection of endpoints to enable Shoppable cloud functionality
+  version: 1.0.2
+  contact:
+    name: Shoppable
+    url: ''
+    email: devteam@shoppable.com
+  termsOfService: 'https://about.shoppable.com/terms#terms-of-use'
+servers:
+  - url: 'http://localhost:8282'
+    description: Local Docker
+  - url: 'https://cloud.staging.shoppable.com'
+    description: Staging
+  - url: 'https://cloud.shoppable.com'
+    description: Production
+paths:
+  /products:
+    post:
+      summary: Get detailed product information
+      description: 'This endpoint is used to query a given set of UPCs to return stock availabilities, up-to-date price information and variations'
+      operationId: products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - upcs
+              properties:
+                upcs:
+                  type: array
+                  items:
+                    type: string
+                    description: Array of UPC codes to lookup
+                lean:
+                  type: boolean
+                  description: 'Setting this property to true will add a metadata object property to the response which adds additional data including total merchants, total in stock, and link off data for a UPC.'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  error:
+                    type: boolean
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+  /catalog:
+    post:
+      summary: Search the catalog for products
+      description: |
+        Query the Shoppable catalog. Supports keyword search, retailer/brand/category filters, price sorting, and date-range filtering on product update times.
+
+        **Response shapes:**
+        - Default (per-variation): each row in `products` is an individual SKU/variation. Variations within the same `partNumber` group are sorted by size (S, M, L, XL, 2XL, 3XL, ...).
+        - `parentOnly: true`: each row in `products` is a parent product (one entry per `partNumber`). Use this for browsing/grid displays where you don't need every size and color on its own row.
+
+        **Filtering by update time:**
+        Use `updatedAfter` and/or `updatedBefore` (ISO 8601) to filter by when products were last updated. In `parentOnly` mode, see `parentUpdateDelta` for snapshot vs. delta semantics.
+      operationId: catalog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - pageSize
+                - page
+                - query
+                - brands
+                - retailers
+                - deepPaging
+              properties:
+                pageSize:
+                  type: integer
+                  description: Number of objects to return per page
+                page:
+                  type: integer
+                  description: Page of results to return
+                query:
+                  type: string
+                  description: Search string used to match results
+                brands:
+                  type: array
+                  items:
+                    type: string
+                    description: Inclusive filter of brand names to include in search. Can be empty.
+                retailers:
+                  type: array
+                  items:
+                    type: string
+                    description: Inclusive filter of retailers to include in search. Can be empty.
+                deepPaging:
+                  type: boolean
+                  default: false
+                sortBy:
+                  type: string
+                  description: Sort results. Acceptable values include "price_high" and "price_low"
+                onSale:
+                  type: boolean
+                  description: Inclusive filter to display only products currently on sale.
+                categories:
+                  type: array
+                  items:
+                    type: string
+                    description: 'Inclusive filter that will only return products assigned to the specified product categories. Note: categories vary by merchant. Shoppable does not control to what categories products are assigned.'
+                parentOnly:
+                  type: boolean
+                  default: false
+                  description: 'When true, groups variations by partNumber and returns one entry per parent product instead of one row per variation. Useful for browsing or paginated catalogs where each parent represents a product family (e.g., one shirt with multiple sizes). Also accepts the alias `single_option`.'
+                single_option:
+                  type: boolean
+                  description: 'Alias for `parentOnly`. Accepts the same boolean values.'
+                updatedAfter:
+                  type: string
+                  format: date-time
+                  description: 'ISO 8601 timestamp. Returns only products whose `updatedAt` (or `createdOn` when `updatedAt` is not populated) is on or after this date. Use alone for "all changes since" or combined with `updatedBefore` for a range. Example - 2026-04-01T00:00:00Z.'
+                updatedBefore:
+                  type: string
+                  format: date-time
+                  description: 'ISO 8601 timestamp. Returns only products whose `updatedAt` (or `createdOn` when `updatedAt` is not populated) is on or before this date. Example - 2026-05-12T00:00:00Z.'
+                parentUpdateDelta:
+                  type: boolean
+                  default: false
+                  description: 'Only applies when parentOnly is true AND a date filter (updatedAfter / updatedBefore) is provided. Controls the parent variation semantics. When false (default, "snapshot" mode), each returned parent reflects its full variation set — isSingleVariation and the chosen representative SKU are computed across ALL variations. When true ("delta" mode), only the variations that fall in the date range are considered when building the parent. Snapshot mode is recommended for showing complete product records; delta mode is useful for thin sync where you only want to see what changed.'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+                  error:
+                    type: boolean
+                  pageCount:
+                    type: integer
+                  totalCount:
+                    type: integer
+                  brands:
+                    type: array
+                    items:
+                      type: string
+                  merchants:
+                    type: array
+                    items:
+                      type: string
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+  '/orders/{orderId}':
+    get:
+      summary: Get details of a specified order
+      description: This endpoint is used to return the details of an order by order number
+      operationId: orders
+      parameters:
+        - in: path
+          name: orderId
+          schema:
+            type: string
+          required: true
+          description: OrderId of the order you wish to return
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orderDate:
+                    type: string
+                  updatedAt:
+                    type: string
+                  orderNumber:
+                    type: string
+                  marketingOptIn:
+                    type: boolean
+                  status:
+                    type: string
+                  shippingTotal:
+                    type: number
+                  itemsTotal:
+                    type: number
+                  total:
+                    type: number
+                  tax_payable:
+                    type: number
+                  email:
+                    type: string
+                  shippingDetails:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/Address'
+                  billingDetails:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/Address'
+                  merchants:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/merchants'
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+  '/v5/orderData/100/page/0/startdate/{startDate}/enddate/{endDate}':
+    get:
+      summary: Get dtails of orders submitted in a given data range
+      description: This endpoint is used to return the details of an order by order number
+      operationId: ordersByDateRange
+      parameters:
+        - in: path
+          name: startDate
+          schema:
+            type: string
+          required: true
+          description: Start date and time in UTC of the orders you wish to return
+        - in: path
+          name: endDate
+          schema:
+            type: string
+          required: true
+          description: End date and time in UTC of the orders you wish to return
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orderDate:
+                    type: string
+                  updatedAt:
+                    type: string
+                  orderNumber:
+                    type: string
+                  marketingOptIn:
+                    type: boolean
+                  status:
+                    type: string
+                  shippingTotal:
+                    type: number
+                  itemsTotal:
+                    type: number
+                  total:
+                    type: number
+                  tax_payable:
+                    type: number
+                  email:
+                    type: string
+                  shippingDetails:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/Address'
+                  billingDetails:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/Address'
+                  merchants:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: Internal merchant ID
+                      merchant:
+                        type: string
+                        description: Merchant's name
+                      orderNumber:
+                        type: number
+                        description: The order's unique identifier
+                      shipping:
+                        type: number
+                        description: Merchant's flat shipping fee.
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/item'
+                      total:
+                        type: number
+                        description: Order total.
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+  '/orders/campaign/{campaignName}':
+    get:
+      summary: Get all orders associated with a specific campaign
+      description: This endpoint is used to return the details of all orders associated with the specified campaign name
+      operationId: ordersbyCampaign
+      parameters:
+        - in: path
+          name: campaignName
+          schema:
+            type: string
+          required: true
+          description: Name of the campaign associated with the orders you wish to return
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orderDate:
+                    type: string
+                  updatedAt:
+                    type: string
+                  orderNumber:
+                    type: string
+                  marketingOptIn:
+                    type: boolean
+                  status:
+                    type: string
+                  shippingTotal:
+                    type: number
+                  itemsTotal:
+                    type: number
+                  total:
+                    type: number
+                  tax_payable:
+                    type: number
+                  email:
+                    type: string
+                  shippingDetails:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/Address'
+                  billingDetails:
+                    type: object
+                    items:
+                      $ref: '#/components/schemas/Address'
+                  merchants:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: Internal merchant ID
+                      merchant:
+                        type: string
+                        description: Merchant's name
+                      orderNumber:
+                        type: number
+                        description: The order's unique identifier
+                      shipping:
+                        type: number
+                        description: Merchant's flat shipping fee.
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/item'
+                      total:
+                        type: number
+                        description: Order total.
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+  /merchants:
+    get:
+      summary: Get information about active merchants
+      description: Requires an API Suite license. Please contact your Customer Success Manager
+      operationId: merchants
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/merchants'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: An error occurred fetching merchants
+  '/merchants/{merchantId}':
+    get:
+      summary: Get information about a single merchant
+      description: Requires an API Suite license. Please contact your Customer Success Manager
+      operationId: merchantsById
+      parameters:
+        - in: path
+          name: merchantId
+          schema:
+            type: string
+          required: true
+          description: The ID of the merchant you wish to return
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/merchants'
+        '400':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: An error occurred fetching merchants
+  /v6/checkout:
+    post:
+      summary: Complete a checkout action
+      description: Requires an API Suite license. Please contact your Customer Success Manager
+      operationId: checkout
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - cartDetails
+                - shippingDetails
+                - billingDetails
+                - paymentToken
+              properties:
+                cartDetails:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      lineItems:
+                        type: array
+                        description: Product information for itmes in cart.
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: Combined merchantId-upc
+                            price:
+                              type: number
+                              description: Product price
+                            quantity:
+                              type: integer
+                      email:
+                        type: string
+                      sendConfirmationEmail:
+                        type: boolean
+                      substitutionOptIn:
+                        type: boolean
+                      marketingOptIn:
+                        type: boolean
+                shippingDetails:
+                  $ref: '#/components/schemas/Address'
+                billingDetails:
+                  $ref: '#/components/schemas/Address'
+                paymentToken:
+                  type: string
+                  description: Value returned from Stripe API. **This token is only good for 15 minutes. A new token will need to be regenerated outside of that window.**
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orderNumber:
+                    type: string
+                    description: Shoppable-created order number
+        '404':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Error message type.
+                  message:
+                    type: string
+                    description: Error message details
+                  merchantIds:
+                    type: array
+                    description: Array of merchantIds impacted.
+                    items:
+                      x-stoplight:
+                        id: rhajinc8yf10c
+                      type: string
+                  outOfStockItems:
+                    type: array
+                    description: Array of product Ids that are out of stock.
+                    items:
+                      type: string
+                  itemsWithPriceChange:
+                    type: array
+                    description: Array of product Ids whose price has changed outside the variablity defined in the Shoppable ToS.
+                    items:
+                      type: string
+        '500':
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: boolean
+                  code:
+                    type: integer
+                  msg:
+                    type: string
+                  phase:
+                    type: string
+                  support:
+                    type: string
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Internal ID used to identify the product
+        affiliateNetwork:
+          type: string
+          description: Affiliate network associated with the product.
+        merchantId:
+          type: string
+          description: Internal Shoppable identifier for the retailer.
+        merchant:
+          type: string
+          description: Retailer / merchant selling the product (e.g. "Lacoste_Corp"). This is the field that previously appeared in `brand`.
+        sourceId:
+          type: string
+          description: Internal identifier
+        partNumber:
+          type: string
+          description: Identifier for a parent product (a product family). All variations of the same product share the same `partNumber`.
+        merchantSku:
+          type: string
+          description: Merchant's SKU for this product.
+        upc:
+          type: string
+          description: Product's UPC.
+        name:
+          type: string
+          description: Product name
+        brand:
+          type: string
+          nullable: true
+          description: Product's manufacturer brand (e.g. "Lacoste"). May be null when the source feed does not provide brand data. Previously contained the retailer/merchant name — that value has moved to the `merchant` field.
+        category:
+          type: string
+          description: Product's category.
+        description:
+          type: string
+          description: Product description.
+        url:
+          type: string
+          description: Product's URL at the merchant's site.
+        salePrice:
+          type: number
+          description: Product's price when on sale.
+        price:
+          type: number
+          description: Product's MSRP.
+        size:
+          type: string
+          description: 'Product size, if applicable.'
+        color:
+          type: string
+          description: 'Product''s color, if applicable.'
+        status:
+          type: integer
+          description: Product status. Acceptable values are 0 (meaning out of stock) or 1 (meaning in stock and available).
+        image:
+          type: array
+          description: URL to product image.
+          items:
+            type: string
+        commissionRate:
+          type: string
+          description: 'Product''s commmission rate, if applicable.'
+        merchantLogo:
+          type: string
+          description: Logo of the merchant from which this product is available.
+        group:
+          type: string
+          description: 'Product group, if applicable. This field is generally used to denote variations of the same product.'
+        maxQuantity:
+          type: integer
+          description: Maximum quantity end users are allowed to order at a time.
+        shippingCharge:
+          type: number
+          description: Fee for shipping the product.
+        freeShipping:
+          type: string
+          description: Denotes if this product is available for free shipping promotions.
+        customerServiceUrl:
+          type: string
+          description: 'URL where users can get help, when needed.'
+        returnPolicy:
+          type: string
+          description: Merchant's return policy for this product.
+        createdOn:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp marking when the product was first added to the Shoppable catalog.
+        updatedAt:
+          type: string
+          format: date-time
+          description: 'ISO 8601 timestamp marking when the product was last updated. For merchants whose catalogs have not yet been reindexed with per-product update timestamps, this falls back to `createdOn`. Use `updatedAfter` / `updatedBefore` on `/catalog` to filter by this value.'
+        isSingleVariation:
+          type: boolean
+          description: 'Present only on `parentOnly: true` responses. Indicates whether the parent product has exactly one variation. When true, the parent record also includes per-variation fields (id, price, size, color, upc, etc.); when false, those fields are omitted and clients should call `/product-availability` for the full variation list.'
+        _version_:
+          type: integer
+          description: Internal version number for a given product.
+        variations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    # cartDetails:
+    #   type: object
+    #   properties:
+    #     lineItems:
+    #       type: object
+    #       properties:
+    #         id:
+    #           type: string
+    #         price:
+    #           type: number
+    #         quantity:
+    #           type: integer
+    #     email:
+    #       type: string
+    #     sendConfirmationEmail:
+    #       type: boolean
+    #     substitutionOptIn:
+    #       type: boolean
+    #     marketingOptIn:
+    #       type: boolean
+    Address:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        zipCode:
+          type: string
+        phoneNumber:
+          type: string
+    item:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Internal product identifier.
+        upc:
+          type: string
+          description: Product UPC.
+        price:
+          type: number
+          description: Product price
+        quantity:
+          type: integer
+          description: Quantity ordered.
+        subTotal:
+          type: number
+          description: 'Order subtotal, which doesn''t include taxes or shipping fees.'
+        name:
+          type: string
+          description: Product name.
+        color:
+          type: string
+          description: 'Product color, if applicable.'
+        size:
+          type: string
+          description: 'Product size, if applicable.'
+        brand:
+          type: string
+          description: Product brand naame.
+        status:
+          type: string
+          description: Order's status. Values can be "processing" "completed" or "canceled"
+    merchants:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Internal merchant ID
+        name:
+          type: string
+          description: Merchant's name
+        merchantLogo:
+          type: string
+          description: URL to merchant's logo
+        maxQuantity:
+          type: number
+          description: Maximum number of items allowed per order
+        group:
+          type: string
+          description: Catalog group this merchant belongs to
+        customerServiceUrl:
+          type: string
+          description: URL to merchant's customer service page
+        returnPolicy:
+          type: string
+          description: URL to page detailing merchant's return policy
+        freeShipping:
+          type: string
+          description: Minimum threshold for order to qualify for free shipping
+        shippingCharge:
+          type: string
+          description: Amount merchant charges for shipping if free shipping threshold is undefined or unmet
+        minimumOrderAmount:
+          type: number
+          description: Minimum order amount for merchant to accept order
+        orderMerchantId:
+          type: string
+          description: Internal legacy identifier to ensure backwards compatibility
+        isActive:
+          type: boolean
+          description: Flag that indicates whether a merchant is active or not
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+      description: |
+        Token provided by your Customer Success Manager
+        
+        **For Internal Endpoints (/internal/*):**
+        ```
+        Kolu72V3T3eFplHNe66e8aef90aba018
+        ```
+        
+        **For Regular API Endpoints (default test customer):**
+        ```
+        U2FsdGVkX192JseAYpgNqMvh5tRQJwAfc4xoA5PKFiXbgWqH2FGD4obxczwL4EEgrj4jVCDxrAblAy3b2W/SK1R3jCWtwQ1fyqQvhfdZGUoXktXwz0tpYfi0I7bVsvQil4D1TeqirpzX66lZ467EFDogCwlWBkoEuhFZNHNnYoQW2LT3Mr5GMIdfBgIcvx6QrtE24Q5pnIBzBDY4KnnpA2bNQKDTZXX5Q8JKM8X30P0DLtvKPz4wqMtpMEG1As0OLhXG2MNKbWlmiTTzhs+q2Kp86uwCEDguTpU8bCUhi44=
+        ```
+        
+        This token works with the default "Test Customer" created by the seed script.
+    Secret:
+      type: apiKey
+      name: x-shoppable-secret
+      in: header
+      description: |
+        Authorization header provided by your Customer Success Manager
+        
+        **For Internal Endpoints (/internal/*):**
+        ```
+        40ba20012ddf314e43234ee53b4b20f2
+        ```
+        
+        **For Regular API Endpoints:**
+        ```
+        test_secret_12345678901234567890
+        ```
+security:
+  - Bearer: []
+  - Secret: []

@@ -1,0 +1,58 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/shoppable-cloud-openapi-original.yml
+entities:
+  - name: Product
+    id_field: id
+    keys: [id, merchantId, partNumber, upc, merchantSku]
+    description: >-
+      A sellable SKU/variation in the Shoppable catalog. Variations of the same
+      product family share a partNumber; a product self-references its variations.
+  - name: Merchant
+    schema: merchants
+    id_field: id
+    keys: [id, orderMerchantId]
+    description: A retailer whose catalog is integrated into Shoppable.
+  - name: Order
+    id_field: orderNumber
+    description: >-
+      A completed checkout. Carries orderDate, status, monetary totals, buyer
+      email, shipping/billing addresses, and per-merchant sub-orders with items.
+  - name: OrderItem
+    schema: item
+    id_field: id
+    description: A single line item within an order (upc, quantity, price, status).
+  - name: Address
+    description: Shared shipping/billing address value object.
+relationships:
+  - from: Product
+    to: Product
+    type: has_many
+    via: variations
+  - from: Product
+    to: Merchant
+    type: belongs_to
+    via: merchantId
+  - from: Order
+    to: Merchant
+    type: has_many
+    via: merchants
+  - from: Order
+    to: OrderItem
+    type: has_many
+    via: merchants[].items
+  - from: Order
+    to: Address
+    type: has_one
+    via: shippingDetails
+  - from: Order
+    to: Address
+    type: has_one
+    via: billingDetails
+  - from: OrderItem
+    to: Product
+    type: belongs_to
+    via: upc
+id_conventions:
+  line_item_id: merchantId-upc (39 chars, combined key used in checkout lineItems)
+  product_status: 0 = out of stock, 1 = in stock/available

@@ -1,0 +1,36 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/shoppable-cloud-openapi-original.yml
+docs: https://about.shoppable.com/help/setup-developer-documentation
+environments:
+  - name: staging
+    base_url: https://cloud.staging.shoppable.com
+  - name: local
+    base_url: http://localhost:8282
+    note: Local Docker image referenced in the published spec.
+  - name: production
+    base_url: https://cloud.shoppable.com
+test_credentials:
+  note: >-
+    The published SwaggerHub definition ships seed/test credentials for the
+    default "Test Customer" created by the seed script. Values below are the
+    provider's own documented test values, quoted verbatim.
+  regular_api:
+    bearer_token_hint: >-
+      A Salted (U2FsdGVkX19...) test bearer token for the default Test Customer
+      is published in the spec securityScheme description.
+    x_shoppable_secret: test_secret_12345678901234567890
+  internal_api:
+    bearer_token: Kolu72V3T3eFplHNe66e8aef90aba018
+    x_shoppable_secret: 40ba20012ddf314e43234ee53b4b20f2
+payments:
+  processor: Stripe
+  payment_token:
+    field: paymentToken
+    note: >-
+      Checkout requires a Stripe-issued paymentToken. Use Stripe test-mode
+      tokens against staging. The token is single-use and expires 15 minutes
+      after generation.
+credentials_provisioning: >-
+  Production bearer token and x-shoppable-secret are issued by your Shoppable
+  Customer Success Manager (salesteam@shoppable.com).

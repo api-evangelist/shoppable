@@ -1,0 +1,28 @@
+generated: '2026-07-21'
+method: searched
+source: https://api.swaggerhub.com/apis/shoppable-dca/shoppable-cloud_api
+versioning:
+  scheme: uri-path
+  current: v6
+  observed: [v5, v6]
+  docs: https://about.shoppable.com/help/setup-developer-documentation
+  notes: >-
+    Endpoints are namespaced by version in the path (e.g. /v6/checkout,
+    /v5/orderData/...). The published SwaggerHub definition is versioned
+    1.0.0 (2025-04-14), 1.0.1 (2025-04-16), 1.0.2 (2026-05-13).
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: >-
+    No formal deprecation/sunset policy is published. The v5 orderData endpoint
+    persists alongside the v6 suite; the checkout Terms of Service define a
+    price-change tolerance beyond which line items are rejected.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.shoppable.com
+status_page_provider: Honeybadger
+monitored_components: [Cloud Services, Order API, Shoppable Admin]
+legacy_operations:
+  - openapi/shoppable-cloud-openapi-original.yml#ordersByDateRange   # /v5/orderData/...
+deprecated_operations: []

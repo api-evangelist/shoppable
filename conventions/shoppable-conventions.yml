@@ -1,0 +1,48 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/shoppable-cloud-openapi-original.yml
+docs: https://about.shoppable.com/help/setup-developer-documentation
+authentication:
+  style: dual-header
+  headers:
+    - name: Authorization
+      value: Bearer <token>
+      note: Bearer token issued by your Customer Success Manager.
+    - name: x-shoppable-secret
+      value: <secret>
+      note: Second required credential, issued alongside the bearer token.
+  cross_ref: authentication/shoppable-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No idempotency-key header is documented. Checkout is guarded instead by a
+    single-use Stripe paymentToken valid for 15 minutes; replaying a token
+    outside that window fails rather than being deduplicated.
+pagination:
+  style: page-number
+  applies_to: [catalog]
+  params:
+    - pageSize (integer, objects per page)
+    - page (integer, zero-based page index)
+    - deepPaging (boolean, enables deep result windows)
+  response_fields: [pageCount, totalCount]
+filtering:
+  applies_to: [catalog]
+  params: [query, brands, retailers, categories, onSale, sortBy, parentOnly, single_option, updatedAfter, updatedBefore, parentUpdateDelta]
+  incremental_sync: >-
+    updatedAfter / updatedBefore (ISO 8601) filter on product updatedAt for
+    "changes since" style catalog synchronization.
+content_type: application/json
+error_envelope:
+  common: [error, code, msg, phase, support]
+  cross_ref: errors/shoppable-problem-types.yml
+versioning:
+  scheme: uri-path
+  observed: [v5, v6]
+  cross_ref: lifecycle/shoppable-lifecycle.yml
+rate_limiting:
+  documented: false
+payments:
+  processor: Stripe
+  token_field: paymentToken
+  token_ttl_minutes: 15

@@ -1,0 +1,53 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/shoppable-cloud-openapi-original.yml
+docs: https://about.shoppable.com/help/shoppable-embedded-checkout
+format: custom-json
+notes: >-
+  Shoppable does NOT use RFC 9457 application/problem+json. Errors are returned
+  as application/json. Most endpoints share a common envelope
+  {error: boolean, code: integer, msg: string, phase: string, support: string}.
+  The /v6/checkout endpoint returns a richer failure body keyed by `type`
+  (request | payment | catalog | unexpected) with arrays of impacted items.
+envelope:
+  common:
+    fields: [error, code, msg, phase, support]
+    description: >-
+      error (boolean flag), code (integer status), msg (human message),
+      phase (pipeline stage where it failed), support (support reference).
+  checkout:
+    fields: [type, message, merchantIds, outOfStockItems, itemsWithPriceChange]
+    description: >-
+      Checkout failures classify the failure via `type` and list the impacted
+      merchantIds, out-of-stock product ids, and product ids whose price
+      changed beyond the tolerance defined in the Shoppable Terms of Service.
+problems:
+  - status: 400
+    type: request
+    title: Bad request
+    remediation: Validate required cart, shipping, and billing fields before retrying.
+    source_operation: openapi/shoppable-cloud-openapi-original.yml#ordersbyCampaign
+  - status: 402
+    type: payment
+    title: Payment required / payment error
+    remediation: >-
+      Regenerate the Stripe paymentToken (valid 15 minutes) and resubmit the
+      checkout.
+    source_operation: openapi/shoppable-cloud-openapi-original.yml#checkout
+  - status: 404
+    type: catalog
+    title: Resource / catalog item not found
+    remediation: >-
+      One or more line items are out of stock or changed price. Inspect
+      outOfStockItems and itemsWithPriceChange and rebuild the cart.
+    source_operation: openapi/shoppable-cloud-openapi-original.yml#checkout
+  - status: 404
+    type: request
+    title: Order or merchant not found
+    remediation: Verify the orderId / merchantId / campaignName path parameter.
+    source_operation: openapi/shoppable-cloud-openapi-original.yml#orders
+  - status: 500
+    type: unexpected
+    title: Unexpected server error
+    remediation: Retry with backoff; contact the value in the `support` field if persistent.
+    source_operation: openapi/shoppable-cloud-openapi-original.yml#checkout

@@ -1,0 +1,26 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Shoppable Commerce API Suite
+  version: 1.0.0
+extends: openapi/shoppable-cloud-openapi-original.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-21'
+      x-api-category: [commerce, checkout, catalog, agentic-commerce]
+      x-payments-processor: Stripe
+  - target: $.info
+    update:
+      x-mcp-server: https://mcp.shoppable.com/mcp
+  - target: $.tags
+    update:
+      - name: catalog
+        description: Product search and merchant catalog operations.
+      - name: orders
+        description: Order retrieval by id, date range, and campaign.
+      - name: checkout
+        description: Universal checkout completion (Stripe-tokenized).
+  - target: $.paths['/v6/checkout'].post
+    update:
+      x-idempotent: false
+      x-payment-token-ttl-minutes: 15

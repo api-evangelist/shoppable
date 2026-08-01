@@ -1,0 +1,49 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/shoppable-cloud-openapi-original.yml
+docs: https://about.shoppable.com/help/setup-developer-documentation
+model: >-
+  Dual-header auth. Every request must send both Authorization: Bearer <token>
+  and x-shoppable-secret: <secret>. Both credentials are issued by your
+  Shoppable Customer Success Manager. No OAuth / OpenID Connect.
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: Bearer
+  type: http
+  scheme: bearer
+  description: |-
+    Token provided by your Customer Success Manager
+
+    **For Internal Endpoints (/internal/*):**
+    ```
+    Kolu72V3T3eFplHNe66e8aef90aba018
+    ```
+
+    **For Regular API Endpoints (default test customer):**
+    ```
+    U2FsdGVkX192JseAYpgNqMvh5tRQJwAfc4xoA5PKFiXbgWqH2FGD4obxczwL4EEgrj4jVCDxrAblAy3b2W/SK1R3jCWtwQ1fyqQvhfdZGUoXktXwz0tpYfi0I7bVsvQil4D1TeqirpzX66lZ467EFDogCwlWBkoEuhFZNHNnYoQW2LT3Mr5GMIdfBgIcvx6QrtE24Q5pnIBzBDY4
+  sources:
+  - openapi/shoppable-cloud-openapi-original.yml
+- name: Secret
+  type: apiKey
+  in: header
+  parameter: x-shoppable-secret
+  description: |-
+    Authorization header provided by your Customer Success Manager
+
+    **For Internal Endpoints (/internal/*):**
+    ```
+    40ba20012ddf314e43234ee53b4b20f2
+    ```
+
+    **For Regular API Endpoints:**
+    ```
+    test_secret_12345678901234567890
+    ```
+  sources:
+  - openapi/shoppable-cloud-openapi-original.yml

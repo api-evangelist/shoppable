@@ -1,0 +1,34 @@
+generated: '2026-07-21'
+method: searched
+status: published
+source: https://72lux.github.io/shoppable-mcp/
+server:
+  name: Shoppable MCP Server
+  transport: http
+  url: https://mcp.shoppable.com/mcp
+  authentication: Bearer token issued by Shoppable (contact hello@shoppable.com)
+description: >-
+  Official hosted Model Context Protocol server for Shoppable's universal
+  commerce platform. Exposes conversational product discovery, cart building,
+  and order lookup to AI assistants (Claude, ChatGPT, and any MCP client).
+  Returns structured JSON with product id, name, brand, category, price,
+  merchant, CDN-hosted images, and pre-built checkout URLs.
+tools:
+  - name: product_search
+    description: >-
+      Query the live catalog by keyword, brand, category, or price range with
+      ranked, deduplicated results.
+    source_operation: openapi/shoppable-cloud-openapi-original.yml#catalog
+  - name: merchant_lookup
+    description: Find merchants by name or ID and view their available inventory.
+    source_operation: openapi/shoppable-cloud-openapi-original.yml#merchants
+  - name: add_to_cart
+    description: >-
+      Add products to a Shoppable cart and receive a pre-populated checkout URL.
+    source_operation: openapi/shoppable-cloud-openapi-original.yml#checkout
+  - name: get_checkout_url
+    description: Retrieve an existing cart's checkout link for later reference.
+  - name: order_lookup
+    description: Check the status of previously placed orders.
+    source_operation: openapi/shoppable-cloud-openapi-original.yml#orders
+contact: hello@shoppable.com

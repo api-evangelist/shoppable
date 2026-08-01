@@ -1,7 +1,29 @@
 aid: shoppable
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/shoppable.png
 name: Shoppable
-description: Shoppable is a company surfaced as a portfolio company of 500-global and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Shoppable is embeddable commerce infrastructure that lets shoppers buy any
+  product from any retailer in a single universal cart without leaving the
+  content they are in. Founded in 2011 by Heather Udo, the company powers
+  off-site commerce across editorial content, social media, ads, connected TV,
+  email, and emerging AI/agentic channels through a single integration. Its
+  Shoppable Commerce API Suite (OpenAPI 3.0) exposes product lookup, catalog
+  search, merchant data, order data, and a universal v6 checkout backed by
+  Stripe tokenization, plus a hosted Model Context Protocol (MCP) server for
+  agentic commerce. Shoppable holds four U.S. patents for universal checkout
+  and is backed by 500 Global, MI Ventures, and Bodley Group.
 url: https://raw.githubusercontent.com/api-evangelist/shoppable/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,15 +33,179 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Commerce
+- E-Commerce
+- Checkout
+- Catalog
+- Payments
+- Agentic Commerce
+- MCP
+- Embeddable Commerce
+- Retail
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: shoppable:shoppable-catalog-api
+  name: Shoppable Catalog API
+  description: The Catalog API from Shoppable — 1 operation(s) for catalog.
+  humanURL: https://about.shoppable.com/help/setup-developer-documentation
+  baseURL: https://cloud.shoppable.com
+  tags:
+  - Catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/shoppable-catalog-api-openapi.yml
+  - type: Swagger
+    url: https://app.swaggerhub.com/apis-docs/shoppable-dca/shoppable-cloud_api/1.0.2
+  - type: DataModel
+    url: data-model/shoppable-data-model.yml
+  - type: ErrorCatalog
+    url: errors/shoppable-problem-types.yml
+  - type: Sandbox
+    url: sandbox/shoppable-sandbox.yml
+- aid: shoppable:shoppable-checkout-api
+  name: Shoppable Checkout API
+  description: The Checkout API from Shoppable — 1 operation(s) for checkout.
+  humanURL: https://about.shoppable.com/help/setup-developer-documentation
+  baseURL: https://cloud.shoppable.com
+  tags:
+  - Checkout
+  properties:
+  - type: OpenAPI
+    url: openapi/shoppable-checkout-api-openapi.yml
+  - type: Swagger
+    url: https://app.swaggerhub.com/apis-docs/shoppable-dca/shoppable-cloud_api/1.0.2
+  - type: DataModel
+    url: data-model/shoppable-data-model.yml
+  - type: ErrorCatalog
+    url: errors/shoppable-problem-types.yml
+  - type: Sandbox
+    url: sandbox/shoppable-sandbox.yml
+- aid: shoppable:shoppable-merchants-api
+  name: Shoppable Merchants API
+  description: The Merchants API from Shoppable — 2 operation(s) for merchants.
+  humanURL: https://about.shoppable.com/help/setup-developer-documentation
+  baseURL: https://cloud.shoppable.com
+  tags:
+  - Merchants
+  properties:
+  - type: OpenAPI
+    url: openapi/shoppable-merchants-api-openapi.yml
+  - type: Swagger
+    url: https://app.swaggerhub.com/apis-docs/shoppable-dca/shoppable-cloud_api/1.0.2
+  - type: DataModel
+    url: data-model/shoppable-data-model.yml
+  - type: ErrorCatalog
+    url: errors/shoppable-problem-types.yml
+  - type: Sandbox
+    url: sandbox/shoppable-sandbox.yml
+- aid: shoppable:shoppable-orderdata-api
+  name: Shoppable OrderData API
+  description: The OrderData API from Shoppable — 1 operation(s) for orderdata.
+  humanURL: https://about.shoppable.com/help/setup-developer-documentation
+  baseURL: https://cloud.shoppable.com
+  tags:
+  - OrderData
+  properties:
+  - type: OpenAPI
+    url: openapi/shoppable-orderdata-api-openapi.yml
+  - type: Swagger
+    url: https://app.swaggerhub.com/apis-docs/shoppable-dca/shoppable-cloud_api/1.0.2
+  - type: DataModel
+    url: data-model/shoppable-data-model.yml
+  - type: ErrorCatalog
+    url: errors/shoppable-problem-types.yml
+  - type: Sandbox
+    url: sandbox/shoppable-sandbox.yml
+- aid: shoppable:shoppable-orders-api
+  name: Shoppable Orders API
+  description: The Orders API from Shoppable — 2 operation(s) for orders.
+  humanURL: https://about.shoppable.com/help/setup-developer-documentation
+  baseURL: https://cloud.shoppable.com
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/shoppable-orders-api-openapi.yml
+  - type: Swagger
+    url: https://app.swaggerhub.com/apis-docs/shoppable-dca/shoppable-cloud_api/1.0.2
+  - type: DataModel
+    url: data-model/shoppable-data-model.yml
+  - type: ErrorCatalog
+    url: errors/shoppable-problem-types.yml
+  - type: Sandbox
+    url: sandbox/shoppable-sandbox.yml
+- aid: shoppable:shoppable-products-api
+  name: Shoppable Products API
+  description: The Products API from Shoppable — 1 operation(s) for products.
+  humanURL: https://about.shoppable.com/help/setup-developer-documentation
+  baseURL: https://cloud.shoppable.com
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/shoppable-products-api-openapi.yml
+  - type: Swagger
+    url: https://app.swaggerhub.com/apis-docs/shoppable-dca/shoppable-cloud_api/1.0.2
+  - type: DataModel
+    url: data-model/shoppable-data-model.yml
+  - type: ErrorCatalog
+    url: errors/shoppable-problem-types.yml
+  - type: Sandbox
+    url: sandbox/shoppable-sandbox.yml
 common:
+- type: DomainSecurity
+  url: security/shoppable-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/shoppable-agentic-access.yml
+- type: Authentication
+  url: authentication/shoppable-authentication.yml
+- type: MCPServer
+  url: mcp/shoppable-mcp.yml
+- type: Conventions
+  url: conventions/shoppable-conventions.yml
+- type: Conformance
+  url: conformance/shoppable-conformance.yml
+- type: Lifecycle
+  url: lifecycle/shoppable-lifecycle.yml
+- type: StatusPage
+  url: https://status.shoppable.com
+- type: ChangeLog
+  url: changelog/shoppable-changelog.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/shoppable-llms.txt
+- type: DeveloperPortal
+  url: https://about.shoppable.com/help/setup-developer-documentation
+- type: Documentation
+  url: https://ask.shoppable.com
+- type: APIReference
+  url: https://app.swaggerhub.com/apis-docs/shoppable-dca/shoppable-cloud_api/1.0.2
+- type: GettingStarted
+  url: https://about.shoppable.com/help/setup-developer-documentation
+- type: Support
+  url: https://ask.shoppable.com
+- type: Blog
+  url: https://about.shoppable.com/blog
+- type: Pricing
+  url: https://about.shoppable.com/pricing
+- type: SignUp
+  url: https://app.shoppable.com/signin
+- type: TermsOfService
+  url: https://about.shoppable.com/terms#terms-of-use
+- type: PrivacyPolicy
+  url: https://about.shoppable.com/terms#privacy-policy
 - type: Website
   url: https://shoppable.com
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v1
