@@ -160,6 +160,8 @@ apis:
   - type: Sandbox
     url: sandbox/shoppable-sandbox.yml
 common:
+- type: Overlay
+  url: overlays/shoppable-cloud-overlay.yaml
 - type: DomainSecurity
   url: security/shoppable-domain-security.yml
 - type: AgenticAccess
