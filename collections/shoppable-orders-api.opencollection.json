@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shoppable Commerce API Suite Catalog Orders API",
+    "version": "1.0.2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get details of a specified order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8282/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "OrderId of the order you wish to return"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to return the details of an order by order number"
+        },
+        {
+          "info": {
+            "name": "Get all orders associated with a specific campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8282/orders/campaign/:campaignName",
+            "params": [
+              {
+                "name": "campaignName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the campaign associated with the orders you wish to return"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to return the details of all orders associated with the specified campaign name"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

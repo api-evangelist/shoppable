@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shoppable Commerce API Suite Catalog Merchants API",
+    "version": "1.0.2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Merchants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get information about active merchants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8282/merchants"
+          },
+          "docs": "Requires an API Suite license. Please contact your Customer Success Manager"
+        },
+        {
+          "info": {
+            "name": "Get information about a single merchant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8282/merchants/:merchantId",
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the merchant you wish to return"
+              }
+            ]
+          },
+          "docs": "Requires an API Suite license. Please contact your Customer Success Manager"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

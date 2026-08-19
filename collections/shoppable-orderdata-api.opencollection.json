@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shoppable Commerce API Suite Catalog OrderData API",
+    "version": "1.0.2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OrderData",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get dtails of orders submitted in a given data range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:8282/v5/orderData/100/page/0/startdate/:startDate/enddate/:endDate",
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "path",
+                "description": "Start date and time in UTC of the orders you wish to return"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "path",
+                "description": "End date and time in UTC of the orders you wish to return"
+              }
+            ]
+          },
+          "docs": "This endpoint is used to return the details of an order by order number"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

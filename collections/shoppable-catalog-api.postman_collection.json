@@ -1,0 +1,242 @@
+{
+  "item": [
+    {
+      "id": "af9c6c9a-ba50-48f8-803f-b65dcbce95c5",
+      "name": "Catalog",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2ebcc79c-9bcd-483b-acad-fc959b328603",
+          "name": "Search the catalog for products",
+          "request": {
+            "name": "Search the catalog for products",
+            "description": {
+              "content": "Query the Shoppable catalog. Supports keyword search, retailer/brand/category filters, price sorting, and date-range filtering on product update times.\n\n**Response shapes:**\n- Default (per-variation): each row in `products` is an individual SKU/variation. Variations within the same `partNumber` group are sorted by size (S, M, L, XL, 2XL, 3XL, ...).\n- `parentOnly: true`: each row in `products` is a parent product (one entry per `partNumber`). Use this for browsing/grid displays where you don't need every size and color on its own row.\n\n**Filtering by update time:**\nUse `updatedAfter` and/or `updatedBefore` (ISO 8601) to filter by when products were last updated. In `parentOnly` mode, see `parentUpdateDelta` for snapshot vs. delta semantics.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pageSize\": \"<integer>\",\n  \"page\": \"<integer>\",\n  \"query\": \"<string>\",\n  \"brands\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"retailers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"deepPaging\": false,\n  \"sortBy\": \"<string>\",\n  \"onSale\": \"<boolean>\",\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"parentOnly\": false,\n  \"single_option\": \"<boolean>\",\n  \"updatedAfter\": \"<dateTime>\",\n  \"updatedBefore\": \"<dateTime>\",\n  \"parentUpdateDelta\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb6ab04e-6b7a-45e5-8ff1-925d0fb8bfd5",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pageSize\": \"<integer>\",\n  \"page\": \"<integer>\",\n  \"query\": \"<string>\",\n  \"brands\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"retailers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"deepPaging\": false,\n  \"sortBy\": \"<string>\",\n  \"onSale\": \"<boolean>\",\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"parentOnly\": false,\n  \"single_option\": \"<boolean>\",\n  \"updatedAfter\": \"<dateTime>\",\n  \"updatedBefore\": \"<dateTime>\",\n  \"parentUpdateDelta\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"products\": [\n    {\n      \"id\": \"string\",\n      \"affiliateNetwork\": \"string\",\n      \"merchantId\": \"string\",\n      \"merchant\": \"string\",\n      \"sourceId\": \"string\",\n      \"partNumber\": \"string\",\n      \"merchantSku\": \"string\",\n      \"upc\": \"string\",\n      \"name\": \"string\",\n      \"brand\": \"string\",\n      \"category\": \"string\",\n      \"description\": \"string\",\n      \"url\": \"string\",\n      \"salePrice\": 163.66858465188372,\n      \"price\": 4096.665247856646,\n      \"size\": \"string\",\n      \"color\": \"string\",\n      \"status\": 2078,\n      \"image\": [\n        \"string\",\n        \"string\"\n      ],\n      \"commissionRate\": \"string\",\n      \"merchantLogo\": \"string\",\n      \"group\": \"string\",\n      \"maxQuantity\": 8557,\n      \"shippingCharge\": 9088.87337318432,\n      \"freeShipping\": \"string\",\n      \"customerServiceUrl\": \"string\",\n      \"returnPolicy\": \"string\",\n      \"createdOn\": \"1952-11-06T12:55:01.202Z\",\n      \"updatedAt\": \"1999-11-24T21:56:57.062Z\",\n      \"isSingleVariation\": false,\n      \"_version_\": 3801,\n      \"variations\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"affiliateNetwork\": \"string\",\n      \"merchantId\": \"string\",\n      \"merchant\": \"string\",\n      \"sourceId\": \"string\",\n      \"partNumber\": \"string\",\n      \"merchantSku\": \"string\",\n      \"upc\": \"string\",\n      \"name\": \"string\",\n      \"brand\": \"string\",\n      \"category\": \"string\",\n      \"description\": \"string\",\n      \"url\": \"string\",\n      \"salePrice\": 8514.378757696877,\n      \"price\": 3024.9231732861035,\n      \"size\": \"string\",\n      \"color\": \"string\",\n      \"status\": 4320,\n      \"image\": [\n        \"string\",\n        \"string\"\n      ],\n      \"commissionRate\": \"string\",\n      \"merchantLogo\": \"string\",\n      \"group\": \"string\",\n      \"maxQuantity\": 613,\n      \"shippingCharge\": 8205.99729605548,\n      \"freeShipping\": \"string\",\n      \"customerServiceUrl\": \"string\",\n      \"returnPolicy\": \"string\",\n      \"createdOn\": \"1989-11-28T18:35:39.029Z\",\n      \"updatedAt\": \"1986-07-22T14:20:13.844Z\",\n      \"isSingleVariation\": true,\n      \"_version_\": 4928,\n      \"variations\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    }\n  ],\n  \"error\": true,\n  \"pageCount\": 6790,\n  \"totalCount\": 8419,\n  \"brands\": [\n    \"string\",\n    \"string\"\n  ],\n  \"merchants\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1275c11-4db6-429b-ab3f-9e00797d062f",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pageSize\": \"<integer>\",\n  \"page\": \"<integer>\",\n  \"query\": \"<string>\",\n  \"brands\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"retailers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"deepPaging\": false,\n  \"sortBy\": \"<string>\",\n  \"onSale\": \"<boolean>\",\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"parentOnly\": false,\n  \"single_option\": \"<boolean>\",\n  \"updatedAfter\": \"<dateTime>\",\n  \"updatedBefore\": \"<dateTime>\",\n  \"parentUpdateDelta\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 8264,\n  \"msg\": \"string\",\n  \"phase\": \"string\",\n  \"support\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5e2ff1f-ba41-40ba-bc77-4ec03c2d00a5",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pageSize\": \"<integer>\",\n  \"page\": \"<integer>\",\n  \"query\": \"<string>\",\n  \"brands\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"retailers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"deepPaging\": false,\n  \"sortBy\": \"<string>\",\n  \"onSale\": \"<boolean>\",\n  \"categories\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"parentOnly\": false,\n  \"single_option\": \"<boolean>\",\n  \"updatedAfter\": \"<dateTime>\",\n  \"updatedBefore\": \"<dateTime>\",\n  \"parentUpdateDelta\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 8264,\n  \"msg\": \"string\",\n  \"phase\": \"string\",\n  \"support\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8282",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4c46b5fa-aed4-4f25-9b6f-c5e7dcb511f6",
+    "name": "Shoppable Commerce API Suite Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A collection of endpoints to enable Shoppable cloud functionality\n\nContact Support:\n Name: Shoppable\n Email: devteam@shoppable.com",
+      "type": "text/plain"
+    }
+  }
+}

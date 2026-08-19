@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "66b6940a-b27c-4a22-9ba8-30ef763fa08f",
+      "name": "Checkout",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4eeca5a8-beab-42fa-bf8a-bf1f4c60d78f",
+          "name": "Complete a checkout action",
+          "request": {
+            "name": "Complete a checkout action",
+            "description": {
+              "content": "Requires an API Suite license. Please contact your Customer Success Manager",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v6",
+                "checkout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cartDetails\": [\n    {\n      \"lineItems\": [\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"email\": \"<string>\",\n      \"sendConfirmationEmail\": \"<boolean>\",\n      \"substitutionOptIn\": \"<boolean>\",\n      \"marketingOptIn\": \"<boolean>\"\n    },\n    {\n      \"lineItems\": [\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"email\": \"<string>\",\n      \"sendConfirmationEmail\": \"<boolean>\",\n      \"substitutionOptIn\": \"<boolean>\",\n      \"marketingOptIn\": \"<boolean>\"\n    }\n  ],\n  \"shippingDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zipCode\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"billingDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zipCode\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"paymentToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d049e093-2d70-4a9b-8b4e-3fdb8981958d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v6",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cartDetails\": [\n    {\n      \"lineItems\": [\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"email\": \"<string>\",\n      \"sendConfirmationEmail\": \"<boolean>\",\n      \"substitutionOptIn\": \"<boolean>\",\n      \"marketingOptIn\": \"<boolean>\"\n    },\n    {\n      \"lineItems\": [\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"email\": \"<string>\",\n      \"sendConfirmationEmail\": \"<boolean>\",\n      \"substitutionOptIn\": \"<boolean>\",\n      \"marketingOptIn\": \"<boolean>\"\n    }\n  ],\n  \"shippingDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zipCode\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"billingDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zipCode\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"paymentToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderNumber\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7f1a445-74da-427a-9eaa-5d6434091ff7",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v6",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cartDetails\": [\n    {\n      \"lineItems\": [\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"email\": \"<string>\",\n      \"sendConfirmationEmail\": \"<boolean>\",\n      \"substitutionOptIn\": \"<boolean>\",\n      \"marketingOptIn\": \"<boolean>\"\n    },\n    {\n      \"lineItems\": [\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"email\": \"<string>\",\n      \"sendConfirmationEmail\": \"<boolean>\",\n      \"substitutionOptIn\": \"<boolean>\",\n      \"marketingOptIn\": \"<boolean>\"\n    }\n  ],\n  \"shippingDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zipCode\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"billingDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zipCode\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"paymentToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"string\",\n  \"message\": \"string\",\n  \"merchantIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"outOfStockItems\": [\n    \"string\",\n    \"string\"\n  ],\n  \"itemsWithPriceChange\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "774752a3-2cba-434a-93cc-3aa0a3ba8fd1",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v6",
+                    "checkout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cartDetails\": [\n    {\n      \"lineItems\": [\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"email\": \"<string>\",\n      \"sendConfirmationEmail\": \"<boolean>\",\n      \"substitutionOptIn\": \"<boolean>\",\n      \"marketingOptIn\": \"<boolean>\"\n    },\n    {\n      \"lineItems\": [\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"email\": \"<string>\",\n      \"sendConfirmationEmail\": \"<boolean>\",\n      \"substitutionOptIn\": \"<boolean>\",\n      \"marketingOptIn\": \"<boolean>\"\n    }\n  ],\n  \"shippingDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zipCode\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"billingDetails\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zipCode\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"paymentToken\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 1073,\n  \"msg\": \"string\",\n  \"phase\": \"string\",\n  \"support\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8282",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c71dd9d0-3eab-46d2-9174-c32110c5e012",
+    "name": "Shoppable Commerce API Suite Catalog Checkout API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A collection of endpoints to enable Shoppable cloud functionality\n\nContact Support:\n Name: Shoppable\n Email: devteam@shoppable.com",
+      "type": "text/plain"
+    }
+  }
+}

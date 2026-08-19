@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Shoppable Commerce API Suite Catalog API",
+    "version": "1.0.2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search the catalog for products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:8282/catalog",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Query the Shoppable catalog. Supports keyword search, retailer/brand/category filters, price sorting, and date-range filtering on product update times.\n\n**Response shapes:**\n- Default (per-variation): each row in `products` is an individual SKU/variation. Variations within the same `partNumber` group are sorted by size (S, M, L, XL, 2XL, 3XL, ...).\n- `parentOnly: true`: each row in `products` is a parent product (one entry per `partNumber`). Use this for browsing/grid displays where you don't ne"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

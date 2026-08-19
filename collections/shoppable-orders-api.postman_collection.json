@@ -1,0 +1,445 @@
+{
+  "item": [
+    {
+      "id": "50d690ec-bdca-489b-951d-7420f2f28bda",
+      "name": "Orders",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75693512-878f-499c-9aaa-100aa679cb6f",
+          "name": "Get details of a specified order",
+          "request": {
+            "name": "Get details of a specified order",
+            "description": {
+              "content": "This endpoint is used to return the details of an order by order number",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) OrderId of the order you wish to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "193f3498-4921-4b5f-bd86-36b16548b832",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) OrderId of the order you wish to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderDate\": \"string\",\n  \"updatedAt\": \"string\",\n  \"orderNumber\": \"string\",\n  \"marketingOptIn\": false,\n  \"status\": \"string\",\n  \"shippingTotal\": 6511.626807437137,\n  \"itemsTotal\": 6901.571465307849,\n  \"total\": 7154.9019739732585,\n  \"tax_payable\": 2503.5340061648703,\n  \"email\": \"string\",\n  \"shippingDetails\": {},\n  \"billingDetails\": {},\n  \"merchants\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cf09368-f151-41e8-aa4a-67e15d774754",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) OrderId of the order you wish to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 9246,\n  \"msg\": \"string\",\n  \"phase\": \"string\",\n  \"support\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26baeab5-a69e-48c2-a4be-3a6bd82fe2c8",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) OrderId of the order you wish to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 9246,\n  \"msg\": \"string\",\n  \"phase\": \"string\",\n  \"support\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80bbda40-bcb8-4502-81ad-8475f2d05df3",
+          "name": "Get all orders associated with a specific campaign",
+          "request": {
+            "name": "Get all orders associated with a specific campaign",
+            "description": {
+              "content": "This endpoint is used to return the details of all orders associated with the specified campaign name",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "campaign",
+                ":campaignName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "campaignName",
+                  "description": "(Required) Name of the campaign associated with the orders you wish to return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66be739f-248e-45fb-b6ae-bea0e30f04c9",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "campaign",
+                    ":campaignName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "campaignName",
+                      "description": "(Required) Name of the campaign associated with the orders you wish to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orderDate\": \"string\",\n  \"updatedAt\": \"string\",\n  \"orderNumber\": \"string\",\n  \"marketingOptIn\": false,\n  \"status\": \"string\",\n  \"shippingTotal\": 4554.763484266134,\n  \"itemsTotal\": 1498.9618426173279,\n  \"total\": 7771.526690944349,\n  \"tax_payable\": 9213.951838605448,\n  \"email\": \"string\",\n  \"shippingDetails\": {},\n  \"billingDetails\": {},\n  \"merchants\": {\n    \"id\": \"string\",\n    \"merchant\": \"string\",\n    \"orderNumber\": 3489.069603465258,\n    \"shipping\": 5783.0361822786945,\n    \"items\": [\n      {\n        \"id\": \"string\",\n        \"upc\": \"string\",\n        \"price\": 1732.6511762315833,\n        \"quantity\": 1274,\n        \"subTotal\": 4133.227291667026,\n        \"name\": \"string\",\n        \"color\": \"string\",\n        \"size\": \"string\",\n        \"brand\": \"string\",\n        \"status\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"upc\": \"string\",\n        \"price\": 1107.3370630740365,\n        \"quantity\": 9522,\n        \"subTotal\": 2742.415306804797,\n        \"name\": \"string\",\n        \"color\": \"string\",\n        \"size\": \"string\",\n        \"brand\": \"string\",\n        \"status\": \"string\"\n      }\n    ],\n    \"total\": 8955.912105401572\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d44e0f3-9490-4bf1-8093-f2d16add67a4",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "campaign",
+                    ":campaignName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "campaignName",
+                      "description": "(Required) Name of the campaign associated with the orders you wish to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 9246,\n  \"msg\": \"string\",\n  \"phase\": \"string\",\n  \"support\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12854e34-ddb7-47df-8e31-d5261d162883",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "campaign",
+                    ":campaignName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "campaignName",
+                      "description": "(Required) Name of the campaign associated with the orders you wish to return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"code\": 9246,\n  \"msg\": \"string\",\n  \"phase\": \"string\",\n  \"support\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8282",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6808d13a-23fe-4a2b-9a89-4463a88e5d72",
+    "name": "Shoppable Commerce API Suite Catalog Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A collection of endpoints to enable Shoppable cloud functionality\n\nContact Support:\n Name: Shoppable\n Email: devteam@shoppable.com",
+      "type": "text/plain"
+    }
+  }
+}

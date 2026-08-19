@@ -1,0 +1,242 @@
+{
+  "item": [
+    {
+      "id": "b162cf7e-c5aa-4fcf-bb98-48211df55a92",
+      "name": "Products",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "58ae236e-c536-4371-ac32-ace945f315e5",
+          "name": "Get detailed product information",
+          "request": {
+            "name": "Get detailed product information",
+            "description": {
+              "content": "This endpoint is used to query a given set of UPCs to return stock availabilities, up-to-date price information and variations",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"upcs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lean\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dab7fdc2-91b3-4378-9669-f116c310280a",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"upcs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lean\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"products\": [\n    {\n      \"id\": \"string\",\n      \"affiliateNetwork\": \"string\",\n      \"merchantId\": \"string\",\n      \"merchant\": \"string\",\n      \"sourceId\": \"string\",\n      \"partNumber\": \"string\",\n      \"merchantSku\": \"string\",\n      \"upc\": \"string\",\n      \"name\": \"string\",\n      \"brand\": \"string\",\n      \"category\": \"string\",\n      \"description\": \"string\",\n      \"url\": \"string\",\n      \"salePrice\": 534.7709113152744,\n      \"price\": 6316.897109733758,\n      \"size\": \"string\",\n      \"color\": \"string\",\n      \"status\": 6365,\n      \"image\": [\n        \"string\",\n        \"string\"\n      ],\n      \"commissionRate\": \"string\",\n      \"merchantLogo\": \"string\",\n      \"group\": \"string\",\n      \"maxQuantity\": 7929,\n      \"shippingCharge\": 8573.985053722547,\n      \"freeShipping\": \"string\",\n      \"customerServiceUrl\": \"string\",\n      \"returnPolicy\": \"string\",\n      \"createdOn\": \"1964-05-16T13:00:52.853Z\",\n      \"updatedAt\": \"1983-09-27T23:52:02.870Z\",\n      \"isSingleVariation\": true,\n      \"_version_\": 6905,\n      \"variations\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"affiliateNetwork\": \"string\",\n      \"merchantId\": \"string\",\n      \"merchant\": \"string\",\n      \"sourceId\": \"string\",\n      \"partNumber\": \"string\",\n      \"merchantSku\": \"string\",\n      \"upc\": \"string\",\n      \"name\": \"string\",\n      \"brand\": \"string\",\n      \"category\": \"string\",\n      \"description\": \"string\",\n      \"url\": \"string\",\n      \"salePrice\": 2870.635421377781,\n      \"price\": 8405.372936831305,\n      \"size\": \"string\",\n      \"color\": \"string\",\n      \"status\": 7905,\n      \"image\": [\n        \"string\",\n        \"string\"\n      ],\n      \"commissionRate\": \"string\",\n      \"merchantLogo\": \"string\",\n      \"group\": \"string\",\n      \"maxQuantity\": 8557,\n      \"shippingCharge\": 2888.7933827347965,\n      \"freeShipping\": \"string\",\n      \"customerServiceUrl\": \"string\",\n      \"returnPolicy\": \"string\",\n      \"createdOn\": \"1979-09-27T05:15:37.624Z\",\n      \"updatedAt\": \"1987-07-06T06:23:54.316Z\",\n      \"isSingleVariation\": false,\n      \"_version_\": 4407,\n      \"variations\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    }\n  ],\n  \"error\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b78b5ae-9daf-4cff-8479-bf25945bd02a",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"upcs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lean\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 8490,\n  \"msg\": \"string\",\n  \"phase\": \"string\",\n  \"support\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ec9dc93-80dd-4ece-9f36-d35dbd115ced",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "products"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"upcs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"lean\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 8490,\n  \"msg\": \"string\",\n  \"phase\": \"string\",\n  \"support\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:8282",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f24d7f80-bbb7-4f2b-a9c9-99ffe91030e4",
+    "name": "Shoppable Commerce API Suite Catalog Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A collection of endpoints to enable Shoppable cloud functionality\n\nContact Support:\n Name: Shoppable\n Email: devteam@shoppable.com",
+      "type": "text/plain"
+    }
+  }
+}
