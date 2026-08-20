@@ -129,6 +129,8 @@ apis:
   humanURL: https://about.shoppable.com/help/setup-developer-documentation
   baseURL: https://cloud.shoppable.com
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
@@ -147,6 +149,8 @@ apis:
   humanURL: https://about.shoppable.com/help/setup-developer-documentation
   baseURL: https://cloud.shoppable.com
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
