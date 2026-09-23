@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Shoppable Commerce API Suite Catalog Products API
+  title: Shoppable Commerce API Suite Products API
   description: A collection of endpoints to enable Shoppable cloud functionality
   version: 1.0.2
   contact:
@@ -126,8 +126,9 @@ components:
           type: string
           description: Product name
         brand:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Product's manufacturer brand (e.g. "Lacoste"). May be null when the source feed does not provide brand data. Previously contained the retailer/merchant name — that value has moved to the `merchant` field.
         category:
           type: string

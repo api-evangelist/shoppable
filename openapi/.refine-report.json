@@ -1,12 +1,7 @@
 {
   "provider": "shoppable",
   "sources": [
-    "shoppable-catalog-api-openapi.yml",
-    "shoppable-checkout-api-openapi.yml",
-    "shoppable-merchants-api-openapi.yml",
-    "shoppable-orderdata-api-openapi.yml",
-    "shoppable-orders-api-openapi.yml",
-    "shoppable-products-api-openapi.yml"
+    "_original/shoppable-cloud-openapi-original.yml"
   ],
   "outputs": [
     "shoppable-catalog-api-openapi.yml",
@@ -19,6 +14,31 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "shoppable-cloud-openapi-original.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "shoppable-cloud-openapi-original.yml: tagged paths POST /products -> Products",
+    "shoppable-cloud-openapi-original.yml: tagged paths POST /catalog -> Catalog",
+    "shoppable-cloud-openapi-original.yml: tagged paths GET /orders/{orderId} -> Orders",
+    "shoppable-cloud-openapi-original.yml: tagged paths GET /v5/orderData/100/page/0/startdate/{startDate}/enddate/{endDate} -> OrderData",
+    "shoppable-cloud-openapi-original.yml: tagged paths GET /orders/campaign/{campaignName} -> Orders",
+    "shoppable-cloud-openapi-original.yml: tagged paths GET /merchants -> Merchants",
+    "shoppable-cloud-openapi-original.yml: tagged paths GET /merchants/{merchantId} -> Merchants",
+    "shoppable-cloud-openapi-original.yml: tagged paths POST /v6/checkout -> Checkout",
+    "shoppable-cloud-openapi-original.yml: declared missing tag: Catalog",
+    "shoppable-cloud-openapi-original.yml: declared missing tag: Checkout",
+    "shoppable-cloud-openapi-original.yml: declared missing tag: Merchants",
+    "shoppable-cloud-openapi-original.yml: declared missing tag: OrderData",
+    "shoppable-cloud-openapi-original.yml: declared missing tag: Orders",
+    "shoppable-cloud-openapi-original.yml: declared missing tag: Products",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "shoppable-catalog-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "shoppable-checkout-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "shoppable-merchants-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "shoppable-orderdata-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "shoppable-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "shoppable-products-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

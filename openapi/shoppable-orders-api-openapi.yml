@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Shoppable Commerce API Suite Catalog Orders API
+  title: Shoppable Commerce API Suite Orders API
   description: A collection of endpoints to enable Shoppable cloud functionality
   version: 1.0.2
   contact:
@@ -217,45 +217,6 @@ paths:
       - Orders
 components:
   schemas:
-    merchants:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Internal merchant ID
-        name:
-          type: string
-          description: Merchant's name
-        merchantLogo:
-          type: string
-          description: URL to merchant's logo
-        maxQuantity:
-          type: number
-          description: Maximum number of items allowed per order
-        group:
-          type: string
-          description: Catalog group this merchant belongs to
-        customerServiceUrl:
-          type: string
-          description: URL to merchant's customer service page
-        returnPolicy:
-          type: string
-          description: URL to page detailing merchant's return policy
-        freeShipping:
-          type: string
-          description: Minimum threshold for order to qualify for free shipping
-        shippingCharge:
-          type: string
-          description: Amount merchant charges for shipping if free shipping threshold is undefined or unmet
-        minimumOrderAmount:
-          type: number
-          description: Minimum order amount for merchant to accept order
-        orderMerchantId:
-          type: string
-          description: Internal legacy identifier to ensure backwards compatibility
-        isActive:
-          type: boolean
-          description: Flag that indicates whether a merchant is active or not
     Address:
       type: object
       properties:
@@ -310,6 +271,45 @@ components:
         status:
           type: string
           description: Order's status. Values can be "processing" "completed" or "canceled"
+    merchants:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Internal merchant ID
+        name:
+          type: string
+          description: Merchant's name
+        merchantLogo:
+          type: string
+          description: URL to merchant's logo
+        maxQuantity:
+          type: number
+          description: Maximum number of items allowed per order
+        group:
+          type: string
+          description: Catalog group this merchant belongs to
+        customerServiceUrl:
+          type: string
+          description: URL to merchant's customer service page
+        returnPolicy:
+          type: string
+          description: URL to page detailing merchant's return policy
+        freeShipping:
+          type: string
+          description: Minimum threshold for order to qualify for free shipping
+        shippingCharge:
+          type: string
+          description: Amount merchant charges for shipping if free shipping threshold is undefined or unmet
+        minimumOrderAmount:
+          type: number
+          description: Minimum order amount for merchant to accept order
+        orderMerchantId:
+          type: string
+          description: Internal legacy identifier to ensure backwards compatibility
+        isActive:
+          type: boolean
+          description: Flag that indicates whether a merchant is active or not
   securitySchemes:
     Bearer:
       type: http

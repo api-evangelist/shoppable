@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Shoppable Commerce API Suite Catalog Merchants API
+  title: Shoppable Commerce API Suite Merchants API
   description: A collection of endpoints to enable Shoppable cloud functionality
   version: 1.0.2
   contact:
