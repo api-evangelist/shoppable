@@ -135,27 +135,6 @@ paths:
       - OrderData
 components:
   schemas:
-    Address:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        address1:
-          type: string
-        address2:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        zipCode:
-          type: string
-        phoneNumber:
-          type: string
     item:
       type: object
       properties:
@@ -189,6 +168,27 @@ components:
         status:
           type: string
           description: Order's status. Values can be "processing" "completed" or "canceled"
+    Address:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        address1:
+          type: string
+        address2:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        zipCode:
+          type: string
+        phoneNumber:
+          type: string
   securitySchemes:
     Bearer:
       type: http
