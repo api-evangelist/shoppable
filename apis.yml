@@ -47,7 +47,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-10-06'
 tags:
 - Company
 - Commerce
@@ -178,6 +178,8 @@ apis:
   - type: Sandbox
     url: sandbox/shoppable-sandbox.yml
 common:
+- url: https://about.shoppable.com/blog/rss.xml
+  type: BlogRSS
 - type: Overlay
   url: overlays/shoppable-cloud-overlay.yaml
 - type: DomainSecurity
