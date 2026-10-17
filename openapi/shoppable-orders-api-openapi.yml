@@ -217,6 +217,39 @@ paths:
       - Orders
 components:
   schemas:
+    item:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Internal product identifier.
+        upc:
+          type: string
+          description: Product UPC.
+        price:
+          type: number
+          description: Product price
+        quantity:
+          type: integer
+          description: Quantity ordered.
+        subTotal:
+          type: number
+          description: Order subtotal, which doesn't include taxes or shipping fees.
+        name:
+          type: string
+          description: Product name.
+        color:
+          type: string
+          description: Product color, if applicable.
+        size:
+          type: string
+          description: Product size, if applicable.
+        brand:
+          type: string
+          description: Product brand naame.
+        status:
+          type: string
+          description: Order's status. Values can be "processing" "completed" or "canceled"
     merchants:
       type: object
       properties:
@@ -256,39 +289,6 @@ components:
         isActive:
           type: boolean
           description: Flag that indicates whether a merchant is active or not
-    item:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Internal product identifier.
-        upc:
-          type: string
-          description: Product UPC.
-        price:
-          type: number
-          description: Product price
-        quantity:
-          type: integer
-          description: Quantity ordered.
-        subTotal:
-          type: number
-          description: Order subtotal, which doesn't include taxes or shipping fees.
-        name:
-          type: string
-          description: Product name.
-        color:
-          type: string
-          description: Product color, if applicable.
-        size:
-          type: string
-          description: Product size, if applicable.
-        brand:
-          type: string
-          description: Product brand naame.
-        status:
-          type: string
-          description: Order's status. Values can be "processing" "completed" or "canceled"
     Address:
       type: object
       properties:
