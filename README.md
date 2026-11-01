@@ -64,6 +64,130 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Shoppable is a company surfaced as a portfolio company of 500-global and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Shoppable is embeddable commerce infrastructure that lets shoppers buy any product from any retailer in a single universal cart without leaving the content they are in. Founded in 2011 by Heather Udo, the company powers off-site commerce across editorial content, social media, ads, connected TV, email, and emerging AI/agentic channels through a single integration. Its Shoppable Commerce API Suite (OpenAPI 3.0) exposes product lookup, catalog search, merchant data, order data, and a universal v6 checkout backed by Stripe tokenization, plus a hosted Model Context Protocol (MCP) server for agentic commerce. Shoppable holds four U.S. patents for universal checkout and is backed by 500 Global, MI Ventures, and Bodley Group.
 
-Backed by: 500-global — https://shoppable.com
+**Areas:** Company · Commerce · E-Commerce · Checkout · Catalog · Payments · Agentic Commerce · MCP · Embeddable Commerce · Retail
+
+## Shoppable on APIs.io
+
+Everything profiled for Shoppable is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/shoppable/](https://apis.io/providers/shoppable/)** — or go straight to one of the APIs or properties below.
+
+### APIs (6)
+
+- [Shoppable Catalog API](https://apis.io/apis/shoppable/shoppable-catalog-api/) — The Catalog API from Shoppable — 1 operation(s) for catalog.
+- [Shoppable Checkout API](https://apis.io/apis/shoppable/shoppable-checkout-api/) — The Checkout API from Shoppable — 1 operation(s) for checkout.
+- [Shoppable Merchants API](https://apis.io/apis/shoppable/shoppable-merchants-api/) — The Merchants API from Shoppable — 2 operation(s) for merchants.
+- [Shoppable OrderData API](https://apis.io/apis/shoppable/shoppable-orderdata-api/) — The OrderData API from Shoppable — 1 operation(s) for orderdata.
+- [Shoppable Orders API](https://apis.io/apis/shoppable/shoppable-orders-api/) — The Orders API from Shoppable — 2 operation(s) for orders.
+- [Shoppable Products API](https://apis.io/apis/shoppable/shoppable-products-api/) — The Products API from Shoppable — 1 operation(s) for products.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Shoppable MCP Server](https://apis.io/servers/shoppable/shoppable-mcp-server/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Shoppable Agentic Access](https://apis.io/agentic-access/shoppable/shoppable-agentic-access/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [Shoppable Commerce API Suite Catalog API](https://apis.io/collections/shoppable/open-shoppable-catalog-api/)
+- [Shoppable Commerce API Suite Catalog Checkout API](https://apis.io/collections/shoppable/open-shoppable-checkout-api/)
+- [Shoppable Commerce API Suite Catalog Merchants API](https://apis.io/collections/shoppable/open-shoppable-merchants-api/)
+- [Shoppable Commerce API Suite Catalog OrderData API](https://apis.io/collections/shoppable/open-shoppable-orderdata-api/)
+- [Shoppable Commerce API Suite Catalog Orders API](https://apis.io/collections/shoppable/open-shoppable-orders-api/)
+- [Shoppable Commerce API Suite Catalog Products API](https://apis.io/collections/shoppable/open-shoppable-products-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Shoppable Cloud Overlay](https://apis.io/overlays/shoppable/shoppable-cloud-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Shoppable Authentication](https://apis.io/security/shoppable/shoppable-authentication/)
+- [Shoppable Domain Security](https://apis.io/security/shoppable/shoppable-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://shoppable.com)
+- [Documentation](https://ask.shoppable.com)
+- [Getting started](https://about.shoppable.com/help/setup-developer-documentation)
+- [API reference](https://app.swaggerhub.com/apis-docs/shoppable-dca/shoppable-cloud_api/1.0.2)
+- [Pricing](https://about.shoppable.com/pricing)
+- [Sign up](https://app.shoppable.com/signin)
+- [Support](https://ask.shoppable.com)
+- [Blog](https://about.shoppable.com/blog)
+- [Terms of service](https://about.shoppable.com/terms#terms-of-use)
+- [Privacy policy](https://about.shoppable.com/terms#privacy-policy)
+- [Status](https://status.shoppable.com)
+
+## API Evangelist rating
+
+**Kin Score 42.9** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 48.8 |
+| Contract governance | 4.5 |
+| Operational transparency | 31.6 |
+| Developer ergonomics | 62.5 |
+| Access clarity | 31.6 |
+
+**Agent readiness 33.6** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 22.3** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/shoppable/](https://apis.io/providers/shoppable/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Shoppable: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/shoppable/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
